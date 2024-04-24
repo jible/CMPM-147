@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- This title is used for tabs and bookmarks -->
+	<title>Experiment 3a - Dungeon map Generator</title>
+
+	<!-- Use UTF character set, a good idea with any webpage -->
+	<meta charset="UTF-8" />
+	<!-- Set viewport so page remains consistently scaled w narrow devices -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<!-- Include CSS file, including a site-wide CSS and for this particular page -->
+	<link rel="stylesheet" type="text/css" href="../css/site.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+
+	<!-- Load jQuery library -->
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+        crossorigin="anonymous"></script>
+	<!-- Load p5.js library -->
+	<script src="https://cdn.jsdelivr.net/npm/p5@1.9.2/lib/p5.js"></script>
+
+	<!-- Link to javascript files - DEFER waits until all elements are rendered -->
+    <script type="text/javascript" src="../js/site.js" DEFER></script>
+	<!-- Use me for a JavaScript OOP Project -->
+	<script type="text/javascript" src="./js/project.js" DEFER></script>
+	<!-- Use me for a p5.js project -->
+	<script type="text/javascript" src="./js/sketch.js" DEFER></script>
+
+	<script
+      src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.2.0/p5.min.js"
+      integrity="sha512-b/htz6gIyFi3dwSoZ0Uv3cuv3Ony7EeKkacgrcVg8CMzu90n777qveu0PBcbZUA7TzyENGtU+qZRuFAkfqgyoQ=="
+      crossorigin="anonymous"
+    ></script>
+    <script src="/sketch.js" defer></script>
+    <script src="/generateDungeon.js" defer></script>
+</head>
+<body>
+
+	
+	<!-- Style this page by changing the CSS in ../css/site.css or css/experiment.css -->
+	<main id="content">
+		<section>
+
+			<h1>Experiment 3a - Dungeon map Generator</h1>
+
+			<div class="minor-section">
+				<div id="canvas-container">
+					<!-- canvas will be added here -->
+					<button id="reseedButton">
+						reseed
+					  </button>
+					  <span id="seedReport"></span>
+					  <hr />
+					  <span id="canvasContainer" style="margin: 10px;"></span>
+					  <textarea cols="30" rows="30" id="asciiBox" style="opacity: 0.5; letter-spacing: 1ex; width: 320px; margin: 10px; font-family: monospace;"></textarea>
+				</div>
+                <div class="fullscreen-box">
+                    <button id="fullscreen">Fullscreen</button>
+                </div>
+			</div>
+
+			<div class="minor-section">
+				<h2>Description</h2>
+				<p>The point of this assignment is to make a dynamic tilemap by generates a matrix 
+					of points of different types, then painting that matrix. First, I made a dungeon generator that made random rooms 
+					and connected them with paths. Then I made unique sprite interactions. 
+					Different tiles should meet in unuiqe ways, like edges of rooms should be walls. 
+					The matrix can be updated in realtime, so the the walls cannot be hardcoded. 
+					In this assignment, we made a function to check the surrounding tiles, then make a 
+					code telling which tiles match the "target tile". Then, we made a function that would apply a different sprite to the tile, depending on its unique code. 
+					When the matrix is updated, the image is updated, so the tiles change and the unique tile interactions update as well.
+				</p>
+			</div>
+
+			<div class="minor-section">
+				<h2>Technical</h2>
+				<p>Going into more detail, first I fill the matrix with background tiles. Then 
+					I "try" make rooms 20. I do this by picking a point, making a random sized rectangle, starting with the point at the top left.
+					Then, if it works, I make a square and store a random point from the square. Then, the next time I successffully make a square, I draw a line connecting
+					the 2 squares. I continue doing this until I have tried to place 20 squares.
+
+					Next, I draw the sprites onto them by drawing whatever sprite I want to that coordinate in the matrix, multiplied by the size of the tiles.
+					After placing certain types of tiles, I ask if it is an "edge tile", meaning that it is next to a tile of a different type. If it is, they should interact uniquely.
+					The ends of rooms make walls! I do this by storing a code in binary which represents which sides are unique, compared to the current tile. Then, I use this 
+					code as an index to an array to pick which tiles should be painted over the current tiles. For example, the top of a room is next to a background tile, so it stores 0001
+					This is the index to my arrays, which tells my function that it should place the north wall tile over the current tile. 
+				</p>
+			</div>
+
+			<div class="minor-section">
+				<h2>Reflection</h2>
+				<p>This expriement was way harder than the previous 2! I had a lot of trouble understanding how the array and the drawcontext function worked. I mostly enjoyed
+					generating the dungeon rooms and finding a way to make them uniquely meet up. I wish I could have added real time effects to this one, but I just ran out of time.
+					I'm proud of how the tiles turned out, but I'm annoyed that the assets limited it so some cases look weird. I couldn't find any solutions to make the 1x1 and 1x2 areas look normal.
+					They don't look right, but I'm happy the rest of the tiles correctly dynamically update and make cool looking rooms. 
+				</p>
+			</div>
+
+		</section>
+		<nav id="links" class="minor-section">
+			<!-- Put link back to homepage here. -->
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+            </ul>
+		</nav>
+	</main>
+</body>
+</html>

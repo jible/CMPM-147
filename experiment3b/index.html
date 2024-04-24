@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- This title is used for tabs and bookmarks -->
+	<title>Experiment 3a - Dungeon map Generator</title>
+
+	<!-- Use UTF character set, a good idea with any webpage -->
+	<meta charset="UTF-8" />
+	<!-- Set viewport so page remains consistently scaled w narrow devices -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<!-- Include CSS file, including a site-wide CSS and for this particular page -->
+	<link rel="stylesheet" type="text/css" href="../css/site.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+
+	<!-- Load jQuery library -->
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+        crossorigin="anonymous"></script>
+	<!-- Load p5.js library -->
+	<script src="https://cdn.jsdelivr.net/npm/p5@1.9.2/lib/p5.js"></script>
+
+	<!-- Link to javascript files - DEFER waits until all elements are rendered -->
+    <script type="text/javascript" src="../js/site.js" DEFER></script>
+	<!-- Use me for a JavaScript OOP Project -->
+	<script type="text/javascript" src="./js/project.js" DEFER></script>
+	<!-- Use me for a p5.js project -->
+	<script type="text/javascript" src="./js/sketch.js" DEFER></script>
+
+	<script
+      src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.2.0/p5.min.js"
+      integrity="sha512-b/htz6gIyFi3dwSoZ0Uv3cuv3Ony7EeKkacgrcVg8CMzu90n777qveu0PBcbZUA7TzyENGtU+qZRuFAkfqgyoQ=="
+      crossorigin="anonymous"
+    ></script>
+    <script src="/sketch.js" defer></script>
+    <script src="/generateDungeon.js" defer></script>
+</head>
+<body>
+
+	
+	<!-- Style this page by changing the CSS in ../css/site.css or css/experiment.css -->
+	<main id="content">
+		<section>
+
+			<h1>Experiment 3a - Dungeon map Generator</h1>
+
+			<div class="minor-section">
+				<div id="canvas-container">
+					<!-- canvas will be added here -->
+					<button id="reseedButton">
+						reseed
+					  </button>
+					  <span id="seedReport"></span>
+					  <hr />
+					  <span id="canvasContainer" style="margin: 10px;"></span>
+					  <textarea cols="30" rows="30" id="asciiBox" style="opacity: 0.5; letter-spacing: 1ex; width: 320px; margin: 10px; font-family: monospace;"></textarea>
+				</div>
+                <div class="fullscreen-box">
+                    <button id="fullscreen">Fullscreen</button>
+                </div>
+			</div>
+
+			<div class="minor-section">
+				<h2>Description</h2>
+				<p>The point of this assignment is to make a dynamic tilemap by generates a matrix 
+					of points of different types, then painting that matrix. First, programmed my drawGrid function, to see how the tiles looked.
+					I wanted to have a bit more fun with this one since I had figured out how the tiles worked in my first itteration. I just wanted to see how the different tiles looked
+					and I ended up adding a path tile to my drawgrid but never got around the generating it correctly, so I left that for another time. 
+					I used this one to just find a bucnh of unique interactions. Im especially proud that the grass will go over the dirt patches and they go over the edges that go over the water.
+					I'm also proud of the glittering water! I think it makes the scene much more interesting and alive! I'm not super happy with how it turned out because it feels
+					like it doesn't work in some areas and it slows down after the first few cycles, but I have a good base for it. 
+				</p>
+			</div>
+
+			<div class="minor-section">
+				<h2>Technical</h2>
+				<p>
+					First, I generate my matrix. I lay down grass on the whole matrix, just to fill out the background. Then, I use perlin noise to make mini-biomes with grassy, water, and dirt areas.
+					It generates a height map and makes the areas that fall at a certain y value the water, then the lower area the dirt, then the lowest area was the grass. After that, I randomly place trees on grassy
+					areas.  
+
+					Next, I draw the sprites onto them by drawing whatever sprite I want to that coordinate in the matrix, multiplied by the size of the tiles.
+					After placing certain types of tiles, I ask if it is an "edge tile", meaning that it is next to a tile of a different type. If it is, they should interact uniquely.
+					The ends of rooms make walls! I do this by storing a code in binary which represents which sides are unique, compared to the current tile. Then, I use this 
+					code as an index to an array to pick which tiles should be painted over the current tiles. For example, the top of a room is next to a background tile, so it stores 0001
+					This is the index to my arrays, which tells my function that it should place the north wall tile over the current tile. Using this, I make it so the water areas are surrounded by ledges
+					and the grassy areas leak into the surrounding areas and even leak over the ledges. I did this by placing the water sprite, then the ledge sprite, then the grassy edge sprite all on the same
+					tile. 
+					Lastly, I had a timer running for each water tile, set to update its own water tile if the timer hit a certain ammount of time. This makes all of the water tiles twlinkle in unique ways.
+				</p>
+			</div>
+
+			<div class="minor-section">
+				<h2>Reflection</h2>
+				<p>This expriement was way harder than the previous 2! I had a lot of trouble understanding how the array and the drawcontext function worked. I wish I spent more time on the 
+					terrain generation, but I honestly just left it to chatGPT. I pretty much told it what I wanted the area to look like and told it to use noise. I was super suprised that 
+					it worked almost perfectly on the first try! I didn't even have to debug or play with the variables for my noise. I'm proud of how the tiles turned out, 
+					but I'm annoyed that the assets limited it so some cases look weird. I ended up encountering a bug that I just didn't have the time to fix! The water tiles do not update correctly
+					with draw context when they are on the border of the canvas. I walked through the code and couldn't find a reason for it to generated incorrectly!
+				</p>
+			</div>
+
+		</section>
+		<nav id="links" class="minor-section">
+			<!-- Put link back to homepage here. -->
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+            </ul>
+		</nav>
+	</main>
+</body>
+</html>
