@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- This title is used for tabs and bookmarks -->
+	<title>Experiment 4B- Infinite Game of Life</title>
+
+	<!-- Use UTF character set, a good idea with any webpage -->
+	<meta charset="UTF-8" />
+	<!-- Set viewport so page remains consistently scaled w narrow devices -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<!-- Include CSS file, including a site-wide CSS and for this particular page -->
+	<link rel="stylesheet" type="text/css" href="../css/site.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+
+	<!-- Load jQuery library -->
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+        crossorigin="anonymous"></script>
+	<!-- Load p5.js library -->
+	<script src="https://cdn.jsdelivr.net/npm/p5@1.9.2/lib/p5.js"></script>
+
+	<!-- Link to javascript files - DEFER waits until all elements are rendered -->    <script type="text/javascript" src="../js/site.js" DEFER></script>   
+    <script src="js/xxhash.min.js" defer></script>
+    <script src="js/engine.js" defer></script>
+    <script src="js/my_world.js" defer></script>
+</head>
+<body>
+	<!-- Style this page by changing the CSS in ../css/site.css or css/experiment.css -->
+	<main id="content">
+		<section>
+
+			<h1>Experiment 4B - Infinite Game of Life</h1>
+
+			<div class="minor-section">
+                <h2></h2>
+				<div id="canvas-container">
+					<!-- canvas will be added here -->
+				</div>
+                <div class="fullscreen-box instructions">
+                    <div>
+                        Arrow keys scroll. Clicking changes tiles.
+                    </div>
+                    <div>
+                        World seed: <input type="text" id="world-seed" value="xyzzy">
+					</div>
+                    <button id="fullscreen">Fullscreen</button>
+                </div>
+			</div>
+
+			<div class="minor-section two-columns">
+                <div class="showcase-img">
+                    
+                </div>
+                <div>
+                    <h2>Description</h2>
+                    <p>Infinity
+						This one was really interesting to make infinite! I was having trouble infintely randomly placing tiles that I needed to look at everysecond. So, I consulted the discord and someone recommened that I load in tiles as they are perceived.
+						This idea turned out wonderfully, so the randomly spawned tiles only spawn as the player reaches more of them.
+						
+						Variation in Space
+						Each of the coordinates have randomly generated colors and the world starts with random sets of living tiles. You can explore as far as you want and still find new patterns.
+						
+						Variations in Key
+						When the key is changed, the the starting tile pattern changes and the unique color for each tile changes. 
+						
+						Signs of Life
+						Every ~second, the rules of life are applied to every tile!
+						Any live cell with fewer than two live neighbors dies, as if by underpopulation.
+						Any live cell with two or three live neighbors lives on to the next generation.
+						Any live cell with more than three live neighbors dies, as if by overpopulation.
+						Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction.
+						(https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life)
+                </div>
+			</div>
+
+			<div class="minor-section">
+				<h2>Technical</h2>
+				<p>
+					I randomly placed tiles in 30x30 areas everytime the player entered them. I took the modulo of the camera location
+					and loaded the chunk the camera entered if they were not in the same chunk they were in on the previous frame. Every time a chunk loaded, 
+					random pieces are added to the array of "alive" tiles. Every ~2.5 seconds, the game advances, applying the rules to each of the living 
+					tiles. There is a rule for dead tiles; if a dead tile is surroiund by exactly 3 living tiles, it will be alive next turn. So, I while counting 
+					the surrounding tiles of a living tile, I would look at its dead neighbors and check thier neighbors to see if they had 3 living neighbors. 
+
+				
+				</p>
+			</div>
+
+			<div class="minor-section">
+				<h2>Reflection</h2>
+				<p>I'm also super happy with this one! I'm a little dissapointed that I couldn't implement my stetch goal: spawning no tiles in seed 0 and making all tiles black.
+					I thought it would be neat if users could enter seed 0 to just get a normal canvas instead of a plane, where they would need to erase everything before making something of their own. 
+					Aside from that, I reached my goal and did even more by implementing the chunk feature!
+					
+				</p>
+			</div>
+
+		</section>
+		<nav id="links" class="minor-section">
+			<!-- Put link back to homepage here. -->
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+            </ul>
+		</nav>
+	</main>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- This title is used for tabs and bookmarks -->
+	<title>Experiment 4A- Infinite World Modifier</title>
+
+	<!-- Use UTF character set, a good idea with any webpage -->
+	<meta charset="UTF-8" />
+	<!-- Set viewport so page remains consistently scaled w narrow devices -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<!-- Include CSS file, including a site-wide CSS and for this particular page -->
+	<link rel="stylesheet" type="text/css" href="../css/site.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+
+	<!-- Load jQuery library -->
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+        crossorigin="anonymous"></script>
+	<!-- Load p5.js library -->
+	<script src="https://cdn.jsdelivr.net/npm/p5@1.9.2/lib/p5.js"></script>
+
+	<!-- Link to javascript files - DEFER waits until all elements are rendered -->    <script type="text/javascript" src="../js/site.js" DEFER></script>   
+    <script src="js/xxhash.min.js" defer></script>
+    <script src="js/engine.js" defer></script>
+    <script src="js/my_world.js" defer></script>
+</head>
+<body>
+	<!-- Style this page by changing the CSS in ../css/site.css or css/experiment.css -->
+	<main id="content">
+		<section>
+
+			<h1>Experiment 4A - Infinite World Modifier</h1>
+
+			<div class="minor-section">
+                <h2></h2>
+				<div id="canvas-container">
+					<!-- canvas will be added here -->
+				</div>
+                <div class="fullscreen-box instructions">
+                    <div>
+                        Arrow keys scroll. Clicking changes tiles.
+                    </div>
+                    <div>
+                        World seed: <input type="text" id="world-seed" value="xyzzy">
+					</div>
+                    <button id="fullscreen">Fullscreen</button>
+                </div>
+			</div>
+
+			<div class="minor-section two-columns">
+                <div class="showcase-img">
+                    
+                </div>
+                <div>
+                    <h2>Description</h2>
+                    <p>Infinity My World kind of turned out like a sandbox game, where you can make your own geography! It is infinite in all directions. Sandbox games often lend themsves to large or infinite worlds. I noticed its kinda fun to just hold the mouse down and move around a lot in the large open area.
+
+						Variation in Space As the audience browses my world, they’ll see that all of the tiles have randomly generated colors! This was much harder to get when following the constraint of using the seed. I tried using the seed and found that the tiles were being re-randomized every frame. Then I was stuck with them all having the same color! So, I
+						
+						Variations in Key Different worlds will have different randomly colored tiles! This was much harder to get when following the constraint of using the seed. I tried using the seed and found that the tiles were being re-randomized every frame. Then I was stuck with them all having the same color! So, I tried determining the color based on the seed and the coordinates, but I kept finding different patterns, which I might try to use on another step of this project. Anyways, I ended up asking chatgpt how I could make a unique random number based on 2 ordered integers. It gave me this weird function that shuffled the bits around and worked something like a hash table. I took the new random number and multiplied that by the seed for each tile and that gave them unique random, seed based colors.
+						
+						Signs of Life Left clicking the tiles causes them to rise into the air. As they rise, they will turn green to show that they are at "grass level" then even higher up, they will turn brown, making them look like mountains. When right clicked, the tiles sink. If they sink below sand leve, they turn blue, indicating that they are now water. This is a fun way to make your own geolocial map! I'm pretty proud that I made it so the user can modify what ammount of tiles they control at once. I had to use the pythagorean theorem to measure how far each tile was, then I made a formula to make it so further tiles moved up at a slower rate ( it was just 1/distance from center).</p>
+                        
+                </div>
+			</div>
+
+			<div class="minor-section">
+				<h2>Technical</h2>
+				<p>I set the colors of all of the tiles to in a random range that would make them all turn out yellow.
+					When the user clicks, it appends every modified tile to an array. Each point's index holds the height it should be at. 
+					non modified tiles are at the normal height. When tiles hit new height ranges, their random color range changes to be blue, green, or brown.
+				</p>
+			</div>
+
+			<div class="minor-section">
+				<h2>Reflection</h2>
+				<p>I'm pretty proud of this one! It took a super long time and it works how I wanted it to. Please try it on the glitch! I added
+					a feature that allows the user to change the range of tiles they modify. It didn't translate onto the github sample the way I wanted it to, so I just removed it. 
+				</p>
+			</div>
+
+		</section>
+		<nav id="links" class="minor-section">
+			<!-- Put link back to homepage here. -->
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+            </ul>
+		</nav>
+	</main>
+</body>
+</html>
