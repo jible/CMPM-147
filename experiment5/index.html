@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- This title is used for tabs and bookmarks -->
+	<title>Experiment 5 - Evolutionary Impressions</title>
+
+	<!-- Use UTF character set, a good idea with any webpage -->
+	<meta charset="UTF-8" />
+	<!-- Set viewport so page remains consistently scaled w narrow devices -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<!-- Include CSS file, including a site-wide CSS and for this particular page -->
+	<link rel="stylesheet" type="text/css" href="../css/site.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+
+	<!-- Load jQuery library -->
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+        crossorigin="anonymous"></script>
+	<!-- Load p5.js library -->
+	<script src="https://cdn.jsdelivr.net/npm/p5@1.9.2/lib/p5.js"></script>
+
+	<!-- Link to javascript files - DEFER waits until all elements are rendered -->
+    <script type="text/javascript" src="../js/site.js" DEFER></script>
+	<!-- Use me for a JavaScript OOP Project -->
+	<script type="text/javascript" src="./js/my_design.js" DEFER></script>
+	<script type="text/javascript" src="./js/sketch.js" DEFER></script>
+</head>
+<body>
+	<!-- Style this page by changing the CSS in ../css/site.css or css/experiment.css -->
+	<main id="content">
+		<section>
+
+			<h1>Experiment 5 - Evolutionary Impressions</h1>
+
+			<div class="minor-section">
+				<div class="fullscreen-box">
+					<select id="dropper"></select>
+					<button id="restart">
+						restart
+					  </button>
+				</div>
+				
+				<p>
+					Mutation rate (<span id="rate"></span>%):<br /><input
+					  id="slider"
+					  type="range"
+					  min="1"
+					  max="100"
+					  value="100"
+					/>
+				  </p>
+
+				<p id="active"></p>
+				<p>Active score: <span id="activeScore"></span></p>
+				<p>Exploration rate: <span id="fpsCounter"></span> fps</p>
+				<p id="best"></p>
+				<p>Best score: <span id="bestScore"></span></p>
+				<p id="memory" data-max-items="16"></p>
+			</div>
+
+			<div class="minor-section">
+				<h2>Description</h2>
+				<p>The goal of this experiment is to make a collection of shapes resemble a given image. This is done by placing them randomly and assessing how successful it 
+					was, iterating on the most successful versions and making it more precist by tuning down the mutation rate. As time goes by, a shape of the original image
+					should become visible, though not perfect as this is an impression.
+				</p>
+			</div>
+
+			<div class="minor-section">
+				<h2>Technical</h2>
+				<p>Carter: The picture is painted over by randomly generated circles. The way that the circles are generated is with the ellipse function and a mutation algorithm.
+					The algorithm takes in hyperparams that slightly change how the circles behave when they are generated. The circles were able to be generated using the ellipse function
+					because when you feed the function the same number for its diameter, it creates a circle.
+
+					Garrett: Each triangle is made from a preset template, and are adjusted solely through position and rotation. The triangle size will scale with the size
+					of the image, so that it can work with any size image. In total, there are 500 triangles throughout the image. As time progresses and the mutation rate
+					narrows it becomes more and more precise, lending to long generation times and a slow process.
+
+					James: I chose two manga pannels because they are black and white and they would have suited the line structure.
+					Unforutnately, I only managed to create horizontal lines, so it didn't turn out how I hoped. I randomly generated 1500 rectangles with random positioning and length, but constrained the 
+					height to less than 7 pixels. It continually places the lines, on the canvas and mutates them trying to match the shapes of the manga pannels. It really doesn't come out nicely, since the lines
+					are all horizontal and the pannels include lines in all directions.  
+				</p>
+			</div>
+
+			<div class="minor-section">
+				<h2>Reflection</h2>
+				<p>Carter: This was a fun process overall, the collaboration was great. This experiment lended itself very well to dividing and conquering. I think that 
+					I was tasked with the easiest of the three shapes. The tricky part was figuring out how to actually get circles on the screen because there is not a built-in
+					circle function. I was able to solve this fairly quickly using the ellipse function. Acutally fiddling with the hyperparams ended up being pretty fun. The 
+					process on refining the algorithm was satisfying and my experience with this project was great.
+				</p>
+				<p>
+					Garrett: Like Carter said, this project really lended itself to collaboration. I enjoyed being able to split up the load and see the results of my
+					friends' works. A couple of things I would add, should time and motivation allot would be making the mutation change automatic, by slowly tuning it down
+					based on the progress of the generation. I would also like to implement color! All in all, I think this project went well and I enjoyed working with others.
+				</p>
+				<p>
+					James: I'll be the third to say that this project was super nice to work on in a group! We all worked on our own sections and collaborated while working on it. It was inspiring to see what
+					the others could make and trying to create something equally interesting. It was reassuring to hear that the others also had trouble with the circle function. I probably would have been 
+					banging my head against a wall for hours instead of just trying other functions. I'm glad I could work with my friends and create some interesting images. I just wish I could have figured out the line function! 
+				</p>
+			</div>
+
+		</section>
+		<nav id="links" class="minor-section">
+			<!-- Put link back to homepage here. -->
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+            </ul>
+		</nav>
+	</main>
+</body>
+</html>
